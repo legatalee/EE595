@@ -1,14 +1,18 @@
 # LongBench/backends/llada_local.py
-import torch
-from pathlib import Path
-
 import sys
-FAST_DLLM = Path.home() / "EE595" / "Fast-dLLM" / "llada"
-sys.path.append(str(FAST_DLLM))
+from pathlib import Path
+import torch
 
+FAST_DLLM_ROOT = Path.home() / "EE595" / "Fast-dLLM"
+sys.path.append(str(FAST_DLLM_ROOT))
+
+from llada.model.modeling_llada import LLaDAModelLM
+from llada.generate import (
+    generate,
+    generate_with_prefix_cache,
+    generate_with_dual_cache,
+)
 from transformers import AutoTokenizer
-from model.modeling_llada import LLaDAModelLM
-from generate import generate, generate_with_prefix_cache, generate_with_dual_cache
 
 class LLaDALocal:
     def __init__(self,
