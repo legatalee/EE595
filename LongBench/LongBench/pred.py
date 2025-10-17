@@ -136,7 +136,7 @@ def get_pred(rank, world_size, data, max_length, max_gen, prompt_format,
         prompt = prompt_format.format(**json_obj)
 
         if backend == "llada-local":
-            pred, _ = runner.generate_once(prompt_text=prompt, system_prompt=None)
+            pred, _ = runner.generate_once(prompt, None)
 
         else:
             tokenized_prompt = tokenizer(prompt, truncation=False, return_tensors="pt").input_ids[0]
