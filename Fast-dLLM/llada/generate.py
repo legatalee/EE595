@@ -20,7 +20,13 @@ import numpy as np
 import torch.nn.functional as F
 import os
 from transformers import AutoTokenizer, AutoModel
-from model.modeling_llada import LLaDAModelLM
+try:
+    from .model.modeling_llada import LLaDAModelLM
+except ImportError:
+    try:
+        from llada.model.modeling_llada import LLaDAModelLM
+    except ImportError:
+        from model.modeling_llada import LLaDAModelLM
 
 def add_gumbel_noise(logits, temperature):
     '''
